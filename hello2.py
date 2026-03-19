@@ -1,2 +1,1 @@
-print("Hello Git Week 2!")
-print("Staging example")
+print("Updated version of file2")
