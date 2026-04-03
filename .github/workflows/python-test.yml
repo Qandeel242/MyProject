@@ -1,0 +1,29 @@
+name: Python CI
+
+# This triggers the action on every push to the repository
+on: [push, pull_request]
+
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps: 
+    # Step 1: Download a copy of your code onto the runner
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Install Python 3.11
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    # Step 3: Install any libraries listed in requirements.txt
+    - name: Install dependencies
+      run: |
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    # Step 4: Run the actual tests in your 'tests/' folder
+    - name: Run tests
+      run: python -m unittest discover -s tests
